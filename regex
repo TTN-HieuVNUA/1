@@ -1,0 +1,38 @@
+[abc]			a, b, hoặc c
+[^abc]			Bất kỳ ký tự nào ngoại trừ a, b, hoặc c
+[a-zA-Z]		a tới z hoặc A tới Z
+[a-d[m-p]]		a tới d, hoặc m tới p
+[a-z&&[def]]	d, e, hoặc f
+[a-z&&[^bc]]	a tới z, ngoại trừ b và c: [ad-z]
+[a-z&&[^m-p]]	a tới z, ngoại trừ m tới p
+[0-9]			0 tới 9
+
+X?		X xảy ra một hoặc không lần	
+X+		X xảy ra một hoặc nhiều lần	
+X*		X xảy ra không hoặc nhiều lần
+X{n}	X chỉ xảy ra n lần	\d{4}	
+X{n,}	X xảy ra n hoặc nhiều lần	
+X{y,z}	X xảy ra ít nhất y lần nhưng nhỏ hơn z lần
+
+^	Có 2 cách sử dụng.
+1. nếu để bên ngoài dấu [...] thì là khẳng định
+2. Nếuu sử dụng trong dấu [...] thì nó có nghĩa là phủ định.
+
+\w:	Bất kỳ ký tự chữ nào (chữ cái và chữ số), viết tắt của [a-zA-Z_0-9]
+\s:	Bất kỳ ký tự trống nào (như dấu cách, tab, xuống dòng, ...), viết tắt của [\t\n\x0B\f\r]
+$:	Đánh dấu Kết thúc của một dòng
+\d:	Bất kỳ chữ số nào, viết tắt của [0-9]
+phủ định của những thứ trên chuyển thành chữ hoa
+
+
+Pattern.matches("[\\w&&[^0-9]]", "b"): true
+Pattern.matches("[\\w&&[^0-9]]", "8"): false
+
+String email_Pattern = "[0-9]{6}@[\\w]{2}.[\\w]+.[\\w]{3,}.[\\w]{2}";
+String email = "637630@sv.vnua.edu.vn";
+String email1 = "63763@sv.vnua.edu.vn";
+Pattern.matches(email_Pattern, email): true
+Pattern.matches(email_Pattern, email1): false (msv được đặt là 6 kí tự)
+
+(*): [\\w]+ : kí tự có thể là a-zA-Z_0-9 xuất hiện 1 hoặc nhiều lần
+			<=> [\\w]{1,}
