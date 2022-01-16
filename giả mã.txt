@@ -1,0 +1,262 @@
+-Vào: a,b;
+-Ra: b;
+{tìm ucln của sô nguyên a,b}
+Program UCLN;
+	1) r := a mod b;
+	2)	while r # 0 do
+			a := b;
+			b := r;
+			r := a mod b;
+	3)	write(b);	
+End.
+
+-Vào: a,b;
+-Ra: ;
+{tìm ucln của sô nguyên a,b}
+Function UCLN(a,b)
+	1) r := a mod b;
+	2) while r # 0 do
+		a:=b;
+		b:=r;
+		r:=a mod b;
+	3) UCLN := b;{giá trị trả về của hàm}
+RETURN
+
+1)Giả mã dạng chương trình
+-Vào: a,b
+-Ra: USCLN
+{Giải thuật này tìm USCLN của 2 số nguyên dương a,b}
+Program TenCT;
+	1)Read(a,b);
+	2)r:=a mod b;
+	3)While r#0 do
+		begin
+			a:=b;
+			b:=r;
+			r:=a mod b;
+		end;
+	4)Write(b);
+End.
+
+{giả mã 1}
+- Vào: x 
+- Ra: e^x
+{giải thuật này tính e^x với epsilon = 0.0001}
+Program tinhEMuX;
+	1)Read(x);
+	2) s:=1;
+		tg:=1;
+		i :=0;
+	3)	Repeat
+			i:=i+1;
+			tg:= (tg*x)/i;
+			s:=s+tg;
+		Until |tg|<0.0001;
+	4) Write(s);
+End.
+
+{giả mã 2}
+- Vào: x 
+- Ra: e^x
+{giải thuật này tính e^x với epsilon = 0.0001}
+Program tinhEMuX;
+	1)Read(x);
+	2) KGiaiThua :=1; k:=0; xMuK:=1; kq:=0; tg:=xMuK/KGiaiThua;
+	3)while tg>=0.0001 do
+		begin
+			kq := kq+tg;
+			k := k+1;
+			xMuK := xMuK*x;
+			KGiaiThua := KGiaiThua*k;
+			tg := xMuK / KGiaiThua;
+		end;
+	4) Write(kq);
+End.
+
+{gỉa mã dạng hàm 1}
+- Vào: x 
+- Ra: e^x
+{giải thuật này tính e^x với epsilon = 0.0001}
+Function tinhEMuX(x);
+	1) s:=1;
+	   tg:=1;
+	   i :=0;
+	2) Repeat
+			i:=i+1;
+			tg:= (tg*x)/i;
+			s:=s+tg;
+		Until |tg|<0.0001;
+	3) tinhEMuX:=s;
+Return;
+
+{giả mã dạng hàm 2}
+- Vào: x 
+- Ra: e^x
+{giải thuật này tính e^x với epsilon = 0.0001}
+Function tinhEMuX(x);
+	1) KGiaiThua :=1; k:=0; xMuK:=1; kq:=0; tg:=xMuK/KGiaiThua;
+	2)while tg>=0.0001 do
+		begin
+			kq := kq+tg;
+			k := k+1;
+			xMuK := xMuK*x;
+			KGiaiThua := KGiaiThua*k;
+			tg := xMuK / KGiaiThua;
+		end;
+	3) tinhEMuX:=kq;
+Return;
+
+
+{THỦ TỤC NHẬP VÀO MA TRẬN}
+-vào: m,n, mt[m][n]
+-ra: không có
+{thủ tục này dùng để nhập 1 ma trận}
+Procedure nhapMT(mt[m][n],m, n);
+	FOR i:=0 TO m do
+		for j:=0 to n do
+			Read(mt[i][j]);
+
+Return
+
+-vào: m,n,X
+-ra: không có
+{thủ tục này dùng để hiển thị MA TRẬN có kích thước m dòng n cột, X là mang 2 chiều}
+Procedure hienMT(m, n,X);
+	For i:=0 to m-1 do
+		For j:=0 to n-1 do
+			Write(X[i][j]);
+Return;
+
+-vào: m,n,X,Y
+ra: X*Y
+{hàm này dùng để hiển nhân 2 MA TRẬN có kích thước khác nhau,
+X,Y là mang 2 chiều, X có kích thước n*m, Y có kích thước m*p}
+Function nhanMT(X,Y,m,n,p);
+	1)  Z[n][p];
+	2)	For i:=0 to n-1 do
+			For j:= 0 to p-1 do
+				sum :=0;
+				For r:=0 to m-1 do
+					sum := sum+ X[i][r] * Y[r][j];
+				Z[i][j] = sum;
+	3)	nhanMT:=Z;
+Return
+
+-vào:A,B,m,n,p 
+-ra: Z
+{chương trình này dùng để gọi các chương chình con}
+Program maTran;
+	
+	{đọc vào m,n,p là số dòng và cột cảu 2 ma trận}
+	1)	Read(m,n,p);
+	
+	{khai bao ma tran X, Y, Z}
+	2)	X,Y,Z;
+	
+	{nhap gia tri cho 2 ma tran X,Y}
+	3)	CALL nhapMT(X,m,n);
+		CALL nhapMT(Y,n,p);
+	
+	{nhan 2 ma tran}
+	4)	Z := nhanMT(X,Y,m,n,p);
+	
+	{hien thi ma tran sau khi nhan}
+	5)	CALL hienMT(C,n,p);
+	
+End.
+
+/*
+*	gỉa mã thêm 1 nút trước 1 nút 
+*/
+-vào: F,M,x
+-ra: không có
+{
+thủ tục này bổ sung phần tử dữ liệu x vào trước nút M trong danh sách
+}
+Procedure SLpreInsert(Var F, M, x)
+	1.{tạo nút mới và gán giá trị cho node N}
+		N <= AVAIL
+		infor(N) := x; link(N) :=NULL {rỗng}
+	2.{nối nút mới vào trước nút M}
+	
+		2.1{khi danh sách rỗng không thấy node M và return luôn}
+			if F=NUll then Return;
+			
+		2.2{khi M là node đầu tiên}
+			if M = F then link(N) := M; F := N;
+		
+		2.3{trường hợp M là nút giữa hoặc cuối cùng}
+			else 
+				p := F;
+				{tìm node P đứng trước node M}
+				while link(P) != M do
+					P := link(P);
+				link(N) := M;
+				link(P) := N;
+				
+	3.{kết thúc}
+		Return
+	
+struct node
+{
+	int infor;
+	node *link;
+} *F, *R;	
+F = NULL;
+R = NULL
+
+học hết cấu trúc lưu trữ tuyến tính
+
+duyệt cây
+trước: A->B->F->D->C->E->G
+GIỮA: F-B-D-A-E-G-C
+SAU:	G-E-C-F-D-B-A
+
+biểu diễn đồ thị bằng cấu trúc lưu trữ phân tán+phép duyệt đồ thị
+P->infor;P=p->link 
+infor(P)
+link(P)
+
+function search(F)
+	if(F==-1)
+		return
+	else
+		begin 
+			P:=F;
+			while infor(link(P)) !=x do
+				P:=link(P);
+			return link(p)
+		end 
+
+giải thuật BST2
+-vào: T, x;
+-ra: q
+{kiem tra xem trong cay co node co gia tri bang x khong va tra ve node}
+Function BST2(T;x)
+    1.{Khởi tạo con trỏ}
+        q := T;
+    2.{Tìm kiếm}
+        While q# Null Do
+          Case
+            x < key(q): q:=left(q);
+            x = key(q): return(q);
+            x > key(q): q:=right(q);
+          End Case
+Return (q);
+
+-vào: T, x;
+-ra: flag
+{kiem tra xem trong cay co node co gia tri bang x khong}
+Function BST2(T;x)
+    1.{Khởi tạo con trỏ}
+        q := T;
+		flag := false;
+    2.{Tìm kiếm}
+        While q# Null Do
+          Case
+            x < key(q): q:=left(q);
+            x = key(q): flag:=true;return(flag);
+            x > key(q):  q:=right(q);
+          End Case
+Return (flag);
+
